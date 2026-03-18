@@ -1,0 +1,25 @@
+# Menggunakan docker compose versi 3.7
+version: "3.7"
+
+# Menentukan dua buah service: item-app dan item-db
+services:
+  # Item-db dibuat terlebih dahulu sebelum item-app dibuat
+  item-db:
+    image: mongo:3 # Menggunakan MongoDB versi 3 dari docker hub
+    restart: always # Memastikan container merestart jika berhenti
+    volumes:
+      - app-db:/data/db # Volume penyimpanan data
+
+  # Item-app dibuat setelah item-db diluncurkan
+  item-app:
+    image: ghcr.io/rothiii/a433-microservices/item-app:v1 # Menggunakan image item-app yang sudah dibuat sebelumnya
+    restart: always # Memastikan container merestart jika berhenti
+    depends_on:
+      - item-db # Memastikan item-app hanya berjalan setelah item-db siap
+    ports:
+      - 80:8080 # Port mapping dari host ke container
+
+
+
+volumes:
+  app-db: # Volume untuk MongoDB
