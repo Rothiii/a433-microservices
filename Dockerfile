@@ -1,6 +1,9 @@
 # Menggunakan base image Node.js versi 14
 FROM node:14
 
+# Menghubungkan image ke repository GitHub
+LABEL org.opencontainers.image.source https://github.com/rothiii/a433-microservices
+
 # Menentukan direktori kerja di dalam container
 WORKDIR /app
 
