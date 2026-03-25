@@ -10,9 +10,8 @@ WORKDIR /app
 #  Menyalin source code aplikasi ke dalam container
 COPY . .
 
-# Menentukan Environment variable untuk aplikasi
-ENV NODE_ENV=production
-ENV DB_HOST=localhost
+# Menentukan Environment variable untuk aplikasi agar berjalan dalam production mode dan menggunakan item-db sebagai database host
+ENV NODE_ENV=production DB_HOST=item-db
 
 # Install dependencies aplikasi untuk production dan build aplikasi
 RUN npm install --production --unsafe-perm && npm run build
